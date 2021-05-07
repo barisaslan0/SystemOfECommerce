@@ -55,11 +55,9 @@ public class AuthManager implements AuthService {
 	public void login(String email, String password) {
 		User loginUser = userService.getUserByEmail(email);
 		if (loginUser == null) {
-			System.out.println("Kullanýcý  bulunamadý!");
+			System.out.println("Bu mail adresiyle kullanýcý bulunamadý!");
 		} else if (email.length() <= 0 || password.length() <= 0) {
 			System.out.println("Tüm alanlar doldurulmalýdýr!");
-		} else if (loginUser.getEmail() != email) {
-			System.out.println("E-mail hatalý!");
 		} else if (loginUser.getPassword() != password) {
 			System.out.println("Þifre hatalý!");
 		} else {

@@ -17,7 +17,7 @@ public class Main {
 		System.out.println("---------- E-TÝCARET SÝSTEMÝ ----------\n");
 
 		System.out.println("---- Google Hesabýyla Giriþ Yapma -----");
-		String googleAccount = "baris_aslan100@gmail.com";
+		String googleAccount = "baris.aslan100@gmail.com";
 		authService.loginWithGoogle(googleAccount);
 
 		System.out.println("\n---- Sisteme Kayýt Olma -----");

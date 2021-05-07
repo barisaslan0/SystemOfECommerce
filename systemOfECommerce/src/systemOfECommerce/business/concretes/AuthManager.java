@@ -24,6 +24,10 @@ public class AuthManager implements AuthService {
 	public void register(int id, String firstName, String lastName, String email, String password) {
 		User registerUser = new User(id, firstName, lastName, email, password);
 
+		if (!fillAllInformation(registerUser.getFirstName(), registerUser.getLastName(), registerUser.getEmail(),
+				registerUser.getPassword())) {
+			return;
+		}
 		if (!nameLengthValid(registerUser.getFirstName(), registerUser.getLastName())) {
 			return;
 		} else if (!checkEmailFormat(registerUser.getEmail())) {
@@ -34,11 +38,11 @@ public class AuthManager implements AuthService {
 			return;
 		} else {
 			this.emailService.sendVerificationMail(registerUser.getEmail());
-			
+
 			Scanner scanner = new Scanner(System.in);
 			System.out.println("E-mail adresinizi 'DOÐRULA' yazarak doðrulayabilirsiniz.");
 			String option = scanner.nextLine();
-			
+
 			if (this.emailService.isVerified(option)) {
 				this.userService.add(registerUser);
 			} else {
@@ -100,6 +104,14 @@ public class AuthManager implements AuthService {
 			return true;
 		}
 		System.out.println("Þifreniz en az 6 karakter olmalýdýr.");
+		return false;
+	}
+
+	public boolean fillAllInformation(String firstName, String lastName, String email, String password) {
+		if (firstName.length() > 0 && lastName.length() > 0 && email.length() > 0 && password.length() > 0) {
+			return true;
+		}
+		System.out.println("Tüm alanlar doldurulmalýdýr!");
 		return false;
 	}
 

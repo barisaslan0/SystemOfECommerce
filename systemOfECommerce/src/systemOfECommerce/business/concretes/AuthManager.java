@@ -56,13 +56,15 @@ public class AuthManager implements AuthService {
 		User loginUser = userService.getUserByEmail(email);
 		if (loginUser == null) {
 			System.out.println("Kullanýcý  bulunamadý!");
-		} else if (loginUser.getEmail() == email && loginUser.getPassword() == password) {
-			System.out.println(
-					"Sisteme baþarýyla giriþ yapýldý: " + loginUser.getFirstName() + " " + loginUser.getLastName());
+		} else if (email.length() <= 0 || password.length() <= 0) {
+			System.out.println("Tüm alanlar doldurulmalýdýr!");
 		} else if (loginUser.getEmail() != email) {
 			System.out.println("E-mail hatalý!");
-		} else {
+		} else if (loginUser.getPassword() != password) {
 			System.out.println("Þifre hatalý!");
+		} else {
+			System.out.println(
+					"Sisteme baþarýyla giriþ yapýldý: " + loginUser.getFirstName() + " " + loginUser.getLastName());
 		}
 	}
 
